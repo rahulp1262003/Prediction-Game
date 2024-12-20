@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
-
   const [enteredNumber, setenteredNumber] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   function numberInputhandler(enteredText) {
     setenteredNumber(enteredText);
@@ -13,14 +13,9 @@ export default function App() {
   function confirmInputHandler() {
     const chosenNumber = parseInt(enteredNumber);
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
-      Alert.alert(
-        'Invalid Number',
-        'Number has to be a number between 1 to 99',
-        [{text: 'Okay', style: 'destructive', onPress: resetInputHandler}]
-      );
+      setModalVisible(true); // Show modal when the number is invalid
       return;
     }
-
     console.log('Valid number...!');
   }
 
@@ -63,6 +58,31 @@ export default function App() {
           </View>
         </View>
       </View>
+
+      {/* Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false); // Close the modal when back is pressed
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Number must be between 1 and 99!</Text>
+            <View style={styles.buttoMain}>
+              <Pressable
+                style={styles.button}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.textStyle}>Close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -101,19 +121,60 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 50,
     overflow: 'hidden',
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   buttonContainer: {
-    // marginHorizontal: 10,
     backgroundColor: '#FCBF49',
     borderRadius: 20,
     alignItems: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   buttonText: {
     paddingVertical: 10,
     color: '#000',
     fontSize: 18,
+    textAlign: 'center',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttoMain:{
+    marginHorizontal:20,
+    flexDirection: 'row'
+  },
+  button: {
+    // flex:1,
+    borderRadius: 20,
+    padding: 10,
+  },
+  textStyle: {
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize:15,
+    textAlign: 'center',
+    paddingHorizontal:5,
+    paddingBottom:2
+  },
+  modalText: {
+    fontSize: 15,
+    marginBottom: 15,
     textAlign: 'center',
   },
 });
