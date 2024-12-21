@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native"
 import NumberContainer from "../components/NumberContainer";
+import { DarkButtonContainer } from "../components/ButtonContainer";
+
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -13,7 +15,7 @@ function generateRandomBetween(min, max, exclude) {
 
 }
 
-export default function GameScreen({userNumber}) {
+export default function GameScreen({ userNumber }) {
 
     const initialGuess = generateRandomBetween(1, 100, userNumber)
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
@@ -24,6 +26,10 @@ export default function GameScreen({userNumber}) {
                 <Text style={styles.title}>Opponent's Guess</Text>
             </View>
             <NumberContainer>{currentGuess}</NumberContainer>
+            <View style={styles.buttonContain}>
+                <DarkButtonContainer title={'-'} />
+                <DarkButtonContainer title={'+'} />
+            </View>
         </View>
     )
 }
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
         marginBottom: 20,
         marginHorizontal: 20,
-        backgroundColor: '#003049',
+        // backgroundColor: '#003049',
         paddingHorizontal: 10,
         paddingVertical: 20,
         borderRadius: 18
@@ -48,6 +54,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#F77F00'
+        color: '#003049'
+    },
+    buttonContain: {
+        marginTop: 20,
+        marginHorizontal: 20,
+        flexDirection: 'row',
     }
 });

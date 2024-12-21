@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { LightButtonContainer } from '../components/ButtonContainer';
+
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setenteredNumber] = useState('');
@@ -40,24 +42,8 @@ export default function StartGameScreen({ onPickNumber }) {
 
         {/* Buttons */}
         <View style={styles.buttonBox}>
-          <View style={styles.buttonOuterContainer}>
-            <Pressable
-              style={styles.buttonContainer}
-              android_ripple={{ color: '#DD9403' }}
-              onPress={resetInputHandler}
-            >
-              <Text style={styles.buttonText}>Reset</Text>
-            </Pressable>
-          </View>
-          <View style={styles.buttonOuterContainer}>
-            <Pressable
-              style={styles.buttonContainer}
-              android_ripple={{ color: '#DD9403' }}
-              onPress={confirmInputHandler}
-            >
-              <Text style={styles.buttonText}>Confirm</Text>
-            </Pressable>
-          </View>
+          <LightButtonContainer onPress={resetInputHandler} title={'Reset'}  />
+          <LightButtonContainer onPress={confirmInputHandler} title={'Confirm'} />
         </View>
       </View>
 
@@ -117,24 +103,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     justifyContent: 'space-between',
-  },
-  buttonOuterContainer: {
-    flex: 1,
-    borderRadius: 50,
-    overflow: 'hidden',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    backgroundColor: '#FCBF49',
-    borderRadius: 20,
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  buttonText: {
-    paddingVertical: 10,
-    color: '#000',
-    fontSize: 18,
-    textAlign: 'center',
   },
   centeredView: {
     flex: 1,
