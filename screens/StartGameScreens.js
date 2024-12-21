@@ -1,7 +1,8 @@
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function StartGameScreen({onPickNumber}) {
+export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setenteredNumber] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -11,12 +12,12 @@ export default function StartGameScreen({onPickNumber}) {
 
   function confirmInputHandler() {
     const chosenNumber = parseInt(enteredNumber);
-    
+
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       setModalVisible(true); // Show modal when the number is invalid
       return;
     }
-    
+
     onPickNumber(chosenNumber);
   }
 
@@ -75,7 +76,7 @@ export default function StartGameScreen({onPickNumber}) {
             <View style={styles.buttoMain}>
               <Pressable
                 style={styles.button}
-                onPress={() => {setModalVisible(false); setenteredNumber('')}}
+                onPress={() => { setModalVisible(false); setenteredNumber('') }}
               >
                 <Text style={styles.textStyle}>Close</Text>
               </Pressable>
@@ -83,8 +84,7 @@ export default function StartGameScreen({onPickNumber}) {
           </View>
         </View>
       </Modal>
-
-      
+      <StatusBar translucent={true} />
     </View>
   );
 }
@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  buttoMain:{
-    marginHorizontal:20,
+  buttoMain: {
+    marginHorizontal: 20,
     flexDirection: 'row'
   },
   button: {
@@ -168,10 +168,10 @@ const styles = StyleSheet.create({
   textStyle: {
     color: 'red',
     fontWeight: 'bold',
-    fontSize:15,
+    fontSize: 15,
     textAlign: 'center',
-    paddingHorizontal:5,
-    paddingBottom:2
+    paddingHorizontal: 5,
+    paddingBottom: 2
   },
   modalText: {
     fontSize: 15,

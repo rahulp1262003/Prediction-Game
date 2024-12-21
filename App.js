@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreens";
 import GameScreen from "./screens/GameScreen";
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
 export default function App() {
   const [userNumber, setuserNumber] = useState()
@@ -17,8 +17,10 @@ export default function App() {
   }
 
   return (
-    <View style={{flex:1}}>
-      {screen}
-    </View>
+    <SafeAreaView style={{flex:1}}>
+      <View style={{ flex:1 }}>
+        {screen}
+      </View>
+    </SafeAreaView>
   );
 }
