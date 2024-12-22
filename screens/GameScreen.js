@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native"
+import { View, Text, StyleSheet, Alert, FlatList } from "react-native"
 import NumberContainer from "../components/NumberContainer";
 import { DarkButtonContainer } from "../components/ButtonContainer";
+import GuessLogItem from "../components/GuessLogItem";
 
 
 function generateRandomBetween(min, max, exclude) {
@@ -26,7 +27,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
 
     useEffect(() => {
         if (currentGuess === userNumber) {
-            onGameOver();
+            onGameOver(guessRounds.length);
         }
     }, [currentGuess, userNumber, onGameOver]);
 
@@ -57,6 +58,8 @@ export default function GameScreen({ userNumber, onGameOver }) {
         setGuessRounds(prevGuessRounds => [newRndNumber, ...prevGuessRounds]);
     }
 
+    const guessRoundsListLength = guessRounds.length;
+
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
@@ -68,7 +71,12 @@ export default function GameScreen({ userNumber, onGameOver }) {
                 <DarkButtonContainer onPress={nextGuessHandler.bind(this, 'greater')} title={'+'} />
             </View>
             <View>
-                {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)}
+                {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+                <FlatList
+                    data={guessRounds}
+                    renderItem={(itemData) => <GuessLogItem roundNumber={guessRoundsListLength - itemData.index} guess={itemData.item} />}
+                    keyExtractor={(item) => item}
+                />
             </View>
         </View>
     )
