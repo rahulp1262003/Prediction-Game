@@ -23,7 +23,7 @@ export function DarkButtonContainer({ title, onPress }) {
                 android_ripple={{ color: '#00507A' }}
                 onPress={onPress}
             >
-                <Text style={styles.darkbuttonText}>{title}</Text>
+                <Text style={[styles.darkbuttonText, ]} >{title}</Text>
             </Pressable>
         </View>
     )
