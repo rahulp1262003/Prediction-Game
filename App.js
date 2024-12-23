@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StartGameScreen from "./screens/StartGameScreens";
 import GameScreen from "./screens/GameScreen";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, StatusBar, View } from "react-native";
 import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {

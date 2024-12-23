@@ -29,7 +29,12 @@ export default function StartGameScreen({ onPickNumber }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.wcContainer}>
+        <Text style={styles.title}>Welconme to the Game</Text>
+        <Text style={styles.bannerTitle}>Guess Number</Text>
+      </View>
       <View style={styles.card}>
+        <Text style={styles.textPlacehilder}>Enter The Number</Text>
         <TextInput
           style={styles.cardTextInput}
           maxLength={2}
@@ -81,13 +86,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#EAE2B7',
   },
+  wcContainer:{
+    marginTop: 90,
+  },
+  title:{
+    fontSize: 20,
+    fontWeight: '500',
+    color: '#003049',
+    textAlign: 'center'
+  },
+  bannerTitle:{
+    fontSize: 40,
+    fontWeight: '600',
+    color: '#F77F00',
+    textAlign: 'center',
+    marginTop: 15,
+    paddingHorizontal: 20
+  },
+  textPlacehilder:{
+    fontSize: 20,
+    fontWeight: '400',
+    color: '#FCBF49'
+  },
   card: {
-    marginTop: 100,
-    width: '95%',
-    height: 200,
+    padding: 25,
+    marginTop: 40,
+    width: '90%',
+    // height: 00,
     backgroundColor: '#003049',
     borderRadius: 30,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   cardTextInput: {
